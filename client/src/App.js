@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Quiz from './component/Quiz';
 import './App.css';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <Quiz/>
                 <ul>
                     {this.state.users.map((user) => {
                        return <li key={user.id}>{user.username}</li>
