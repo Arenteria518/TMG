@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {bindActionCreators } from "redux";
 import { selectActor } from "../actions";
-import { fetchActors} from "../actions";
+import { fetchPopularActors, fetchMovies} from "../actions";
 
 import Question from './Question';
 import Answer from './Answer';
@@ -13,16 +13,16 @@ class Quiz extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Actor: {},
-            Actors: [],
             showAnswer: false
         }
     }
 
     componentDidMount(){
         //sets random actor as selected actor from state.actors
-        this.props.fetchActors();
-        this.props.selectActor(this.props.actors[Math.floor(Math.random() * this.props.actors.length)]);
+        this.props.fetchPopularActors().then(() => {
+            this.props.selectActor(this.props.actors[Math.floor(Math.random() * this.props.actors.length)]);
+        });
+
     }
 
     toggleAnswer() {
@@ -44,10 +44,13 @@ class Quiz extends Component {
             <div>
                 <Question showAnswer={this.state.showAnswer} actor={this.props.selectedActor}/>
                 <Answer showAnswer={this.state.showAnswer}/>
-                <Guess/>
-                <ul>
-                    {this.renderList()}
-                </ul>
+                <Guess
+                    movies={this.props.movies}
+                    actors={this.props.actors}
+                    fetchMovies={this.props.fetchMovies}
+                    selectedActor={this.props.selectedActor}
+                    selectActor={this.props.selectActor}
+                />
             </div>
         )
     }
@@ -56,14 +59,16 @@ class Quiz extends Component {
 function mapStateToProps(state) {
     return {
         actors: state.actors,
-        selectedActor: state.selectedActor
+        selectedActor: state.selectedActor,
+        movies: state.movies
     }
 }
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
         selectActor: selectActor,
-        fetchActors: fetchActors
+        fetchPopularActors: fetchPopularActors,
+        fetchMovies: fetchMovies,
     }, dispatch)
 }
 

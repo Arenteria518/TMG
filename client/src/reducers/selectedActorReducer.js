@@ -1,8 +1,8 @@
-export default function(state = {name: ""}, action){
+export default function(state = {}, action){
 
     switch(action.type){
         case 'ACTOR_SELECTED':
-            return state
+            return action.payload
         default:
             return state
     }

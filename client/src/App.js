@@ -11,20 +11,12 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch('./users')
-            .then(res => res.json())
-            .then(users => this.setState({users}));
     }
 
     render() {
         return (
             <div className="App">
                 <Quiz/>
-                <ul>
-                    {this.state.users.map((user) => {
-                       return <li key={user.id}>{user.username}</li>
-                    })}
-                </ul>
             </div>
         );
     }
