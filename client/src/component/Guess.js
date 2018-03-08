@@ -1,5 +1,19 @@
 import React, {Component} from 'react';
 
+// Teach Autosuggest how to calculate suggestions for any given input value.
+const getSuggestions = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0? [] : this.props.suggested.filter( item => {
+        item.title.toLowerCase().slice(0, inputLength) === inputValue
+    });
+}
+
+// When suggestion is clicked, Autosuggest needs to populate the input
+// based on the clicked suggestion. Teach Autosuggest how to calculate the
+// input value for every given suggestion.
+
 class Guess extends Component {
     constructor(props) {
         super(props);
