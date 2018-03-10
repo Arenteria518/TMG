@@ -6,6 +6,7 @@ const ROOT_URL= 'https://api.themoviedb.org/3';
 export const FETCH_POPULAR_ACTORS = 'FETCH_POPULAR_ACTORS';
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const MOVIE_SEARCH = 'MOVIE_SEARCH';
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 
 export function selectActor(actor) {
     return {
@@ -15,7 +16,7 @@ export function selectActor(actor) {
 }
 
 export function fetchPopularActors() {
-    let page = Math.floor(Math.random() * 10) + 1;
+    let page = Math.floor(Math.random() * 8) + 1;
     const url = `${ROOT_URL}/person/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     var request = axios.get(url);
     return {
@@ -39,5 +40,12 @@ export function movieSearch(term) {
     return{
         type: MOVIE_SEARCH,
         payload: request
+    }
+}
+
+export function clearSearch(){
+    return{
+        type: CLEAR_SEARCH,
+        payload: []
     }
 }

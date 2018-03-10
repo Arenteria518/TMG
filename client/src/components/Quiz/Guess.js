@@ -21,7 +21,8 @@ class Guess extends Component {
         super(props);
         this.state = {
             value: '',
-            suggestions: []
+            suggestions: [],
+            isNotDisabled: true
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +41,9 @@ class Guess extends Component {
     onChange = (event, {newValue, method}) => {
         if (newValue.length > 0 && method !== 'down' && method !== 'up' && method !== "click") {
             this.props.movieSearch(event.target.value);
+        }
+        if(method === "click"){
+            this.handleSubmit();
         }
         this.setState({
             value: newValue
@@ -61,11 +65,13 @@ class Guess extends Component {
 
 
     handleSubmit(e) {
-        e.preventDefault();
-        this.props.fetchMovies(this.props.selectedActor.id)
-            .then(() => {
-                this.compareMovies();
-            })
+        if(e) e.preventDefault();
+        if(this.state.isNotDisabled) {
+            this.props.fetchMovies(this.props.selectedActor.id)
+                .then(() => {
+                    this.compareMovies();
+                })
+        }
     }
 
     compareMovies() {
@@ -74,15 +80,36 @@ class Guess extends Component {
         });
 
         if (arr.length > 0) {
-            alert("true");
-            this.props.selectActor(this.props.actors[Math.floor(Math.random() * this.props.actors.length)])
-            this.setState({value: ''});
+            this.props.toggleIsCorrect(true);
+            this.props.toggleAnswer();
+            this.setState({isNotDisabled: false})
+            this.delay(600)
+                .then(() => {
+                    this.props.toggleAnswer();
+                    this.props.clearSearch();
+                    this.props.selectActor(this.props.actors[Math.floor(Math.random() * this.props.actors.length)])
+                    this.setState({value: ''});
+                    this.setState({isNotDisabled: true})
+                })
         }
         else {
-            alert("false")
+            this.props.toggleIsCorrect(false);
+            this.props.toggleAnswer();
+            this.setState({isNotDisabled: false})
+            this.delay(600)
+                .then(() => {
+                    this.props.toggleAnswer();
+                    this.setState({isNotDisabled: true})
+                })
         }
 
         arr = [];
+    }
+
+    delay(time, v){
+        return new Promise((resolve) => {
+            setTimeout(resolve.bind(null, v), time)
+        })
     }
 
     render() {
@@ -95,7 +122,7 @@ class Guess extends Component {
         };
 
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="autosuggest__container" onSubmit={this.handleSubmit}>
                 <AutoSuggest
                     suggestions={this.props.suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -105,7 +132,6 @@ class Guess extends Component {
                     inputProps={inputProps}
                     alwaysRenderSuggestions={true}
                 />
-                <input type="submit" value="submit"/>
             </form>
         )
     }

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import './quiz.css'
 
 import {bindActionCreators } from "redux";
-import { selectActor } from "../actions";
-import { fetchPopularActors, fetchMovies, movieSearch} from "../actions";
+import { selectActor } from "../../actions/index";
+import { fetchPopularActors, fetchMovies, movieSearch, clearSearch} from "../../actions/index";
 
 import Question from './Question';
 import Answer from './Answer';
@@ -13,8 +14,12 @@ class Quiz extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showAnswer: false
+            showAnswer: false,
+            isCorrect: true
         }
+        this.toggleAnswer = this.toggleAnswer.bind(this);
+        this.toggleIsCorrect = this.toggleIsCorrect.bind(this);
+
     }
 
     componentDidMount(){
@@ -31,18 +36,14 @@ class Quiz extends Component {
         })
     }
 
-    renderList(){
-        return this.props.actors.map((actor) => {
-            return(
-                <li key={actor.name}>{actor.name}</li>
-            )
-        })
+    toggleIsCorrect(isCorrect){
+        this.setState({isCorrect: isCorrect})
     }
 
     render(){
         return(
-            <div>
-                <Question showAnswer={this.state.showAnswer} actor={this.props.selectedActor}/>
+            <div className="quiz">
+                <Question showAnswer={this.state.showAnswer} isCorrect={this.state.isCorrect} actor={this.props.selectedActor}/>
                 <Answer showAnswer={this.state.showAnswer}/>
                 <Guess
                     movies={this.props.movies}
@@ -52,6 +53,9 @@ class Quiz extends Component {
                     selectActor={this.props.selectActor}
                     suggestions = {this.props.searchResults}
                     movieSearch ={this.props.movieSearch}
+                    clearSearch={this.props.clearSearch}
+                    toggleAnswer={this.toggleAnswer}
+                    toggleIsCorrect={this.toggleIsCorrect}
                 />
             </div>
         )
@@ -72,7 +76,8 @@ function mapDispatchToProps(dispatch){
         selectActor: selectActor,
         fetchPopularActors: fetchPopularActors,
         fetchMovies: fetchMovies,
-        movieSearch: movieSearch
+        movieSearch: movieSearch,
+        clearSearch
     }, dispatch)
 }
 
