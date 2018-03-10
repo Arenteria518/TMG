@@ -41,7 +41,7 @@
 /*autoSuggest styles*/
 .autosuggest__container{
     position: relative;
-    height: 40vh;
+    height: 160vh;;
     width: 282px;
     margin: 0 auto;
 }

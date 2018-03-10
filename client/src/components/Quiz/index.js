@@ -44,7 +44,7 @@ class Quiz extends Component {
         return(
             <div className="quiz">
                 <Question showAnswer={this.state.showAnswer} isCorrect={this.state.isCorrect} actor={this.props.selectedActor}/>
-                <Answer showAnswer={this.state.showAnswer}/>
+                {/*<Answer showAnswer={this.state.showAnswer}/>*/}
                 <Guess
                     movies={this.props.movies}
                     actors={this.props.actors}
