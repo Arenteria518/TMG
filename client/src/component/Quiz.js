@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {bindActionCreators } from "redux";
 import { selectActor } from "../actions";
-import { fetchPopularActors, fetchMovies} from "../actions";
+import { fetchPopularActors, fetchMovies, movieSearch} from "../actions";
 
 import Question from './Question';
 import Answer from './Answer';
@@ -50,6 +50,8 @@ class Quiz extends Component {
                     fetchMovies={this.props.fetchMovies}
                     selectedActor={this.props.selectedActor}
                     selectActor={this.props.selectActor}
+                    suggestions = {this.props.searchResults}
+                    movieSearch ={this.props.movieSearch}
                 />
             </div>
         )
@@ -60,7 +62,8 @@ function mapStateToProps(state) {
     return {
         actors: state.actors,
         selectedActor: state.selectedActor,
-        movies: state.movies
+        movies: state.movies,
+        searchResults: state.searchResults
     }
 }
 
@@ -69,6 +72,7 @@ function mapDispatchToProps(dispatch){
         selectActor: selectActor,
         fetchPopularActors: fetchPopularActors,
         fetchMovies: fetchMovies,
+        movieSearch: movieSearch
     }, dispatch)
 }
 

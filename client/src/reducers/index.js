@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import actorsReducer from './actorsReducer';
 import selectedActorReducer from './selectedActorReducer';
 import moviesReducer from './moviesReducers';
+import searchResultReducer from './searchResultsReducer';
 
 const rootReducer = combineReducers({
     actors: actorsReducer,
     selectedActor: selectedActorReducer,
-    movies: moviesReducer
+    movies: moviesReducer,
+    searchResults: searchResultReducer
 });
 
 export default rootReducer

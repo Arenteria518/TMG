@@ -4,7 +4,8 @@ const API_KEY = 'd2fc40106e7d4e08c42e84a905e3c470';
 const ROOT_URL= 'https://api.themoviedb.org/3';
 
 export const FETCH_POPULAR_ACTORS = 'FETCH_POPULAR_ACTORS';
-export const FETCH_MOVIES = 'FETCH_MOVIES'
+export const FETCH_MOVIES = 'FETCH_MOVIES';
+export const MOVIE_SEARCH = 'MOVIE_SEARCH';
 
 export function selectActor(actor) {
     return {
@@ -28,6 +29,15 @@ export function fetchMovies(actorID){
     var request = axios.get(url);
     return{
         type: FETCH_MOVIES,
+        payload: request
+    }
+}
+
+export function movieSearch(term) {
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${term}&page=1&include_adult=false`
+    var request = axios.get(url);
+    return{
+        type: MOVIE_SEARCH,
         payload: request
     }
 }
