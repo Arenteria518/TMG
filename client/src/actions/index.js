@@ -15,7 +15,7 @@ export function selectActor(actor) {
 }
 
 export function fetchPopularActors() {
-    let page = Math.floor(Math.random() * 5) + 1;
+    let page = Math.floor(Math.random() * 10) + 1;
     const url = `${ROOT_URL}/person/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     var request = axios.get(url);
     return {

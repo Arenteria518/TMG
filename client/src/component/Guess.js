@@ -6,7 +6,7 @@ import AutoSuggest from 'react-autosuggest';
 // input value for every given suggestion.
 const getSuggestionValue = suggestion => {
     console.log(suggestion.title);
-   return suggestion.title
+    return suggestion.title
 };
 
 const renderSuggestion = suggestion => (
@@ -37,7 +37,7 @@ class Guess extends Component {
         );
     }
 
-    onChange = (event, { newValue, method }) => {
+    onChange = (event, {newValue, method}) => {
         if (newValue.length > 0 && method !== 'down' && method !== 'up' && method !== "click") {
             this.props.movieSearch(event.target.value);
         }
@@ -46,7 +46,7 @@ class Guess extends Component {
         })
     };
 
-    onSuggestionsFetchRequested = ({ value }) => {
+    onSuggestionsFetchRequested = ({value}) => {
         this.setState({
             suggestions: this.getSuggestions(value)
         });
@@ -86,7 +86,7 @@ class Guess extends Component {
     }
 
     render() {
-        const { value, suggestions } = this.state;
+        const {value, suggestions} = this.state;
 
         const inputProps = {
             placeholder: 'Type in a movie',
@@ -96,14 +96,15 @@ class Guess extends Component {
 
         return (
             <form onSubmit={this.handleSubmit}>
-            <AutoSuggest
-                suggestions={this.props.suggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-            />
+                <AutoSuggest
+                    suggestions={this.props.suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
+                    alwaysRenderSuggestions={true}
+                />
                 <input type="submit" value="submit"/>
             </form>
         )
