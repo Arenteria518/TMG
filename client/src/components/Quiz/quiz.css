@@ -1,3 +1,7 @@
+.quiz{
+    height: 100%;
+}
+
 /*question styles*/
 .image-container{
     position: relative;
@@ -38,10 +42,62 @@
     background-color: rgba(255, 7, 0, 0.76);
 }
 
-/*autoSuggest styles*/
+.react-autosuggest__suggestions-container {
+    display: none;
+    max-height: 45vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.react-autosuggest__container {
+    display: inline-block;
+    position: relative;
+}
+
+.react-autosuggest__input {
+    width: 240px;
+    height: 30px;
+    padding: 10px 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    -webkit-appearance: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+    display: block;
+    position: absolute;
+    top: 51px;
+    width: 280px;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+}
+.react-autosuggest__suggestion{
+    cursor: pointer;
+    padding: 10px 20px;
+    text-align: left;
+}
+.react-autosuggest__suggestions-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.react-autosuggest__suggestion--highlighted{
+    background-color: #ddd;
+}
+
+/*
+!*autoSuggest styles*!
 .autosuggest__container{
     position: relative;
-    height: 160vh;;
     width: 282px;
     margin: 0 auto;
 }
@@ -90,3 +146,4 @@
 .react-autosuggest__suggestion--highlighted{
     background-color: #ddd;
 }
+*/

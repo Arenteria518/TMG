@@ -9,6 +9,7 @@ import { fetchPopularActors, fetchMovies, movieSearch, clearSearch} from "../../
 import Question from './Question';
 import Answer from './Answer';
 import Guess from './Guess';
+import GuessModal from './GuessModal';
 
 class Quiz extends Component {
     constructor(props) {
@@ -57,7 +58,9 @@ class Quiz extends Component {
                     toggleAnswer={this.toggleAnswer}
                     toggleIsCorrect={this.toggleIsCorrect}
                 />
+                <GuessModal/>
             </div>
+
         )
     }
 }
