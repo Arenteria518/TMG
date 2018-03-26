@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'd2fc40106e7d4e08c42e84a905e3c470';
+import { API_KEY } from '../config/keys';
 const ROOT_URL= 'https://api.themoviedb.org/3';
 
 export const FETCH_POPULAR_ACTORS = 'FETCH_POPULAR_ACTORS';
